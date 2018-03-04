@@ -8,7 +8,6 @@ import socket
 import logging
 import os
 from threading import Thread
-
 ipykernel_imported = True
 spark_imported = True
 try:
@@ -136,7 +135,6 @@ def load_ipython_extension(ipython):
     ipython is the InteractiveShell instance
     """
     global ip, monitor  # For Debugging
-
     global logger
     logger = logging.getLogger("sparkmonitorkernel")
     logger.setLevel(logging.DEBUG)
@@ -194,6 +192,7 @@ def configure(conf):
     port = monitor.getPort()
     print("SparkConf Configured, Starting to listen on port:", str(port))
     os.environ["SPARKMONITOR_KERNEL_PORT"] = str(port)
+    conf.set("spark.monitor.port",str(port))
     logger.info(os.environ["SPARKMONITOR_KERNEL_PORT"])
     conf.set("spark.extraListeners",
              "sparkmonitor.listener.JupyterSparkMonitorListener")

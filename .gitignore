@@ -10,3 +10,5 @@ extension/node_modules/
 extension/sparkmonitor/static/
 *.jar
 extension/docs/
+target/
+.idea/

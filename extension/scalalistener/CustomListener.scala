@@ -31,7 +31,8 @@ import java.io._
 class JupyterSparkMonitorListener(conf: SparkConf) extends SparkListener {
 
   println("SPARKLISTENER: Started SparkListener for Jupyter Notebook")
-  val port = scala.util.Properties.envOrElse("SPARKMONITOR_KERNEL_PORT", "ERRORNOTFOUND")
+  val port = conf.get("spark.monitor.port")
+//  val port = scala.util.Properties.envOrElse("SPARKMONITOR_KERNEL_PORT", "ERRORNOTFOUND")
   println("SPARKLISTENER: Port obtained from environment: " + port)
   var socket: Socket = null
   var out: OutputStreamWriter = null
